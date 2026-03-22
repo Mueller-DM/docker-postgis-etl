@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+env/
+.env
+
+# Application Logs (Keep the folder, ignore the files)
+logs/*.log
+
+# IDE / OS Files
+.vscode/
+.DS_Store
+
+# Intentionally tracking data/raw/ and outputs/ for deliverable evaluation.
+# (In a standard production repository, these paths would be ignored).

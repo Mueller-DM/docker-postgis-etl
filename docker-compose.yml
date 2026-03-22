@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # The Spatial Database
+  postgis_db:
+    image: postgis/postgis:15-3.3
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword  # Generic credentials for local containerized evaluation
+      POSTGRES_DB: onx_hunting
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d onx_hunting"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # The Python ETL Pipeline
+  etl_pipeline:
+    build: .
+    volumes:
+      # Mount local directory to persist generated HTML outputs
+      - .:/app
+    environment:
+      # DB_URL references the internal Docker service name (postgis_db)
+      - DB_URL=postgresql://postgres:postgrespassword@postgis_db:5432/onx_hunting
+    depends_on:
+      postgis_db:
+        condition: service_healthy
+
+volumes:
+  pg_data:
