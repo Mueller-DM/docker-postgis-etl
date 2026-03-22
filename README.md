@@ -1,4 +1,4 @@
-# onX Technical Challenge: Upland Hunting Intelligence (GMU 102)
+ Upland Hunting Intelligence (GMU 102)
 
 ## Project Objective
 This project delivers an automated, reproducible Spatial ETL pipeline and an interactive web map designed for a first-time Upland Bird (Pheasant) hunter in Colorado's GMU 102. 
